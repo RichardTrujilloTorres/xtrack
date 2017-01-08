@@ -1,6 +1,7 @@
 
 
 * []	isolate login 
+* []	add modal in 'todos'
 
 * []	fix login
 * []	authentication & authorization

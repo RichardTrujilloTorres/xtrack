@@ -3,11 +3,11 @@
 
 	angular
 		.module('app.core')
-		.service('data', data);
+		.service('dataservice', data);
 
 	/* ngInject */
 	function data($http) {
-		var API_URL = 'api/v1/';
+		var URL = 'api/v1/';
 
 		return {
 			all: function(resourceUri) {

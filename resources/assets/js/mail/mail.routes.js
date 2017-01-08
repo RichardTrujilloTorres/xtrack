@@ -9,14 +9,13 @@
 	config.injector = ['$stateProvider', '$urlRouterProvider'];
 	function config($stateProvider, $urlRouterProvider) {
 
-		// $urlRouterProvider.otherwise('/#dashboard');
+		// $urlRouterProvider.otherwise('/');
 		
 		$stateProvider
-			.state('todos', {
-				url: '/todos',
-				templateUrl: 'templates/todos/index.html',
-				controller: 'TodosController',
-				controllerAs: 'todos' 
+			.state('mail', {
+				url: '/mail',
+				templateUrl: 'templates/mail/index.html',
+				controller: 'MailController as mail' 
 			});
 	}
 

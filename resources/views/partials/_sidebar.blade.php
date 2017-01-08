@@ -19,18 +19,12 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li>
-                <a href="">
-                    <i class="material-icons">person</i>
-                    <p>User Profile</p>
-                </a>
-            </li>
-            <li>
+            <!-- <li>
                 <a href="#/games">
                     <i class="material-icons">games</i>
                     <p>Games</p>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="#/todos">
                     <i class="material-icons">check_box</i>
@@ -38,33 +32,27 @@
                 </a>
             </li>
             <li>
-                <a href="typography.html">
-                    <i class="material-icons">library_books</i>
-                    <p>Typography</p>
+                <a href="#/contacts">
+                    <i class="material-icons">contacts</i>
+                    <p>Contacts</p>
                 </a>
             </li>
             <li>
-                <a href="icons.html">
-                    <i class="material-icons">bubble_chart</i>
-                    <p>Icons</p>
+                <a href="#/mail">
+                    <i class="material-icons">inbox</i>
+                    <p>Mail</p>
                 </a>
             </li>
             <li>
-                <a href="maps.html">
+                <a href="#/cloud">
+                    <i class="material-icons">cloud</i>
+                    <p>Cloud</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
                     <i class="material-icons">location_on</i>
-                    <p>Maps</p>
-                </a>
-            </li>
-            <li>
-                <a href="notifications.html">
-                    <i class="material-icons text-gray">notifications</i>
-                    <p>Notifications</p>
-                </a>
-            </li>
-			<li class="active-pro">
-                <a href="upgrade.html">
-                    <i class="material-icons">unarchive</i>
-                    <p>Upgrade to PRO</p>
+                    <p>Bills</p>
                 </a>
             </li>
         </ul>
