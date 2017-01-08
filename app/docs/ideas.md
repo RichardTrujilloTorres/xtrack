@@ -4,6 +4,8 @@
 
 * Google Driver sync and support
 * AWS integration
+* Simple Twitter bot
+
 
 
 * Algolia autocompletion & search

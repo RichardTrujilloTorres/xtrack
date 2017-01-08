@@ -2,10 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Todo;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    /**
+     * Syncs all the data w/ Algolia, AWS, etc.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sync()
+    {
+
+        Todo::reindex();
+
+        return 'Syncing...';
+    }
+
+
     /**
      * Display a listing of the resource.
      *

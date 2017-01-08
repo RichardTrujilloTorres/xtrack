@@ -20,8 +20,8 @@
 						<td>{{ todo.category }}</td>
 						<td>
 							<!-- <i class="material-icons" ng-click="">pageview</i> -->
-							<i class="material-icons" ng-click="todos.edit($index)">edit</i>
-							<i class="material-icons" ng-click="todos.delete($index)">delete</i>
+							<i class="material-icons" ng-click="todos.edit(todo.id)">edit</i>
+							<i class="material-icons" ng-click="todos.delete(todo.id)">delete</i>
 						</td>
 					</tr>
 				</tbody>

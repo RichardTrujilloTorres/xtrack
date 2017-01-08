@@ -152,10 +152,11 @@
 
 	<script src="js/app.js"></script>
 
+	<!-- Algolia Search -->
+	<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+
 	<script type="text/javascript">
 		var APP_NAME = '{{ config('app.name') }}';
-
-
 	</script>
 
 </html>

@@ -173,6 +173,7 @@ return [
         // Zizaco\Entrust\EntrustServiceProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
         Toin0u\Geotools\GeotoolsServiceProvider::class,
+        AlgoliaSearch\Laravel\AlgoliaServiceProvider::class,
 
         /*
          * Application Service Providers...
