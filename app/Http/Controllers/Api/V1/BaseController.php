@@ -22,6 +22,7 @@ abstract class BaseController extends Controller
      */
     public function index()
     {
+        // TODO: set up pagination when asked for it
         $resource = $this -> model::all();
         return response([
         	$this -> resourceName => $resource -> toArray(),

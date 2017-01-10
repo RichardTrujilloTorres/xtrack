@@ -21,3 +21,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+$factory->define(App\Notification::class, function (Faker\Generator $faker) {
+    return [
+        'body' => $faker->sentence,
+        'level' => random_int(1, 3),
+    ];
+});

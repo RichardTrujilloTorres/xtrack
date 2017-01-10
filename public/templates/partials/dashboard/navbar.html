@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Material Dashboard</a>
+			<a class="navbar-brand" href="#">Dashboard</a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -20,15 +20,19 @@
 				<li class="dropdown">
 					<a href="" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="material-icons">notifications</i>
-						<span class="notification">5</span>
+						<span class="notification" 
+						ng-show="dashboard.notifications.length">
+							{{ dashboard.notifications.length }}
+						</span>
 						<p class="hidden-lg hidden-md">Notifications</p>
 					</a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Mike John responded to your email</a></li>
-						<li><a href="#">You have 5 new tasks</a></li>
-						<li><a href="#">You're now friend with Andrew</a></li>
-						<li><a href="#">Another Notification</a></li>
-						<li><a href="#">Another One</a></li>
+					<ul class="dropdown-menu" ng-show="dashboard.notifications.length > 0">
+						<li ng-repeat="notification in dashboard.notifications" >
+							<a href="#">{{ notification.body }}</a>
+						</li>
+					</ul>
+					<ul class="dropdown-menu" ng-hide="dashboard.notifications.length">
+						<li>You have no notifications.</li>
 					</ul>
 				</li>
 				<li>
@@ -38,8 +42,9 @@
 						</a>
 				</li>
 			</ul>
-
-			<div ui-view="search"></div>
+			
+			<!-- <div ui-view="search"></div> -->
+			<div ng-include="'templates/search/algolia-autocomplete.html'" ng-controller="SearchController as search"></div>
 		
 		</div>
 	</div>

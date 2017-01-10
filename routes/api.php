@@ -67,6 +67,9 @@ $api -> version('v1', [
 	# Todos
 	$api -> resource('/todos', 'TodosController');
 
+	# Notifications
+	$api -> resource('/notifications', 'NotificationsController');
+
 
 
 	$api -> get('test', function() {

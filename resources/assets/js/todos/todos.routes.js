@@ -9,7 +9,7 @@
 	config.injector = ['$stateProvider', '$urlRouterProvider'];
 	function config($stateProvider, $urlRouterProvider) {
 
-		// $urlRouterProvider.otherwise('/#dashboard');
+		$urlRouterProvider.otherwise('/');
 		
 		$stateProvider
 			.state('todos', {

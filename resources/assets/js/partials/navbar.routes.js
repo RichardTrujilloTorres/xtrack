@@ -11,12 +11,12 @@
 
 		$urlRouterProvider.otherwise('/');
 		
-		$stateProvider
-			.state('navbar', {
-				url: '/',
-				templateUrl: 'templates/partials/navbar.html',
-				controller: 'NavbarController as navbar' 
-			});
+		// $stateProvider
+		// 	.state('navbar', {
+		// 		url: '/',
+		// 		templateUrl: 'templates/partials/navbar.html',
+		// 		controller: 'NavbarController as navbar' 
+		// 	});
 	}
 
 })(); 

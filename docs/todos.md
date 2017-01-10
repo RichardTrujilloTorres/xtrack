@@ -1,5 +1,13 @@
 
 
+
+
+* []	user profile 
+* []	settings
+* []	setup Laravel Scout
+* []	Sync
+
+
 * []	isolate login 
 * []	add modal in 'todos'
 

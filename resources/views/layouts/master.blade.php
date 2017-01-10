@@ -2,8 +2,8 @@
 <html lang="en" ng-app='app'>
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+	<link rel="apple-touch-icon" sizes="76x76" href="" />
+	<link rel="icon" type="image/png" href="" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>@yield('title') | {{ config('app.name') }}</title>
@@ -37,7 +37,25 @@
 	    @include('partials._sidebar')
 
 
-	    <div ui-view></div>
+	    <!-- <div ui-view></div> -->
+
+	    <div class="main-panel">
+
+		<div ng-include="'templates/partials/dashboard/navbar.html'" 
+		ng-controller="DashboardController as dashboard"></div> 
+		<!-- <div ui-view="navbar"></div> -->
+
+		<div class="content">
+			<div class="container-fluid">
+				<!-- <div ng-include="'templates/sections/graphics.html'"></div> -->
+				<div ui-view></div>
+			</div>
+		</div>
+	</div>
+
+
+	
+</div>
 
 
 		@include('partials._footer')
@@ -94,31 +112,6 @@
 
 	<script type="text/javascript">
 		var APP_NAME = '{{ config('app.name') }}';
-	</script>
-
-	<script>
-		// TODO: refactor this
-function getDatasets() {
-
-	console.log('getDatasets()');
-
-
-	return {
-      source: algolia.sources.hits(index, { hitsPerPage: 5 }),
-      //value to be displayed in input control after user's suggestion selection
-      displayKey: 'title',
-      //hash of templates used when rendering dataset
-      templates: {
-        //'suggestion' templating function used to render a single suggestion
-        suggestion: function(suggestion) {
-            return '<span>' +
-                suggestion._highlightResult.title.value
-                + '</span>';
-        }
-      }
-  	};
-
-}
 	</script>
 
 </html>

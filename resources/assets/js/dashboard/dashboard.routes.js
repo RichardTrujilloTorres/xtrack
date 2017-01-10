@@ -7,40 +7,32 @@
 	
 	/* @ngInject */
 	function config($stateProvider, $urlRouterProvider) {
-		
-		// $stateProvider
-		// 	.state('dashboard', {
-		// 		url: '/dashboard',
-		// 		templateUrl: 'templates/users/dashboard.html',
-		// 		controller: 'DashboardController',
-		// 		controllerAs: 'dashboard',
-		// 		data: { requiredLogin: true } 
-		// 	});
-
-		// $stateProvider
-		// 	.state('search', {
-		// 		url: '/dashboard',
-		// 		templateUrl: 'templates/users/dashboard.html',
-		// 		controller: 'DashboardController',
-		// 		controllerAs: 'dashboard',
-		// 		data: { requiredLogin: true } 
-		// 	});
 
 		$stateProvider
 			.state('dashboard', {
-				url: '/dashboard',
+				url: '/',
 				views: {
 					'': {
-						templateUrl: 'templates/users/dashboard.html',
-						controller: 'DashboardController as dummy',
+						templateUrl: 'templates/dashboard/index.html',
+						controller: 'DashboardController',
+						controllerAs: 'dashboard'
 					},
-					'search@dashboard': {
-						templateUrl: 'templates/search/algolia-autocomplete.html',
-						controller: 'SearchController as search',
-					}
+					// 'search@dashboard': {
+					// 	// templateUrl: 'templates/search/algolia-autocomplete.html',
+					// 	templateUrl: 'templates/dashboard/partials/search.html',
+					// 	controller: 'SearchController',
+					// 	controllerAs: 'search'
+					// },
+					// 'navbar@dashboard': {
+					// 	templateUrl: 'templates/dashboard/partials/navbar.html',
+					// 	controller: 'NavbarController',
+					// 	controllerAs: 'dashboard'
+					// }
 				},
 				data: { requiredLogin: true } 
 			});
+
+		
 	}
 
 })(); 

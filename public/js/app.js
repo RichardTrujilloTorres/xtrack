@@ -111,9 +111,11 @@
 		.controller('DashboardController', DashboardController);
 	
 	
+	DashboardController.$inject = ['dataservice'];
 	/* @ngInject */
-	function DashboardController() {
+	function DashboardController(dataservice) {
 		var vm = this;
+		// vm.notifications = {};
 
 
 		Init();
@@ -121,8 +123,19 @@
 
 		function Init() {
 			// console.log(APP_NAME);
+			loadNotifications();
 		}
 
+
+		function loadNotifications() {
+			// console.log('notifications');
+			var notifications = dataservice;
+			notifications.all('notifications')
+				.then(function(response) {
+					// console.log(response.data.notifications);
+					vm.notifications = response.data.notifications;
+				});
+		}
 		
 	}
 
@@ -136,40 +149,32 @@
 	
 	/* @ngInject */
 	function config($stateProvider, $urlRouterProvider) {
-		
-		// $stateProvider
-		// 	.state('dashboard', {
-		// 		url: '/dashboard',
-		// 		templateUrl: 'templates/users/dashboard.html',
-		// 		controller: 'DashboardController',
-		// 		controllerAs: 'dashboard',
-		// 		data: { requiredLogin: true } 
-		// 	});
-
-		// $stateProvider
-		// 	.state('search', {
-		// 		url: '/dashboard',
-		// 		templateUrl: 'templates/users/dashboard.html',
-		// 		controller: 'DashboardController',
-		// 		controllerAs: 'dashboard',
-		// 		data: { requiredLogin: true } 
-		// 	});
 
 		$stateProvider
 			.state('dashboard', {
-				url: '/dashboard',
+				url: '/',
 				views: {
 					'': {
-						templateUrl: 'templates/users/dashboard.html',
-						controller: 'DashboardController as dummy',
+						templateUrl: 'templates/dashboard/index.html',
+						controller: 'DashboardController',
+						controllerAs: 'dashboard'
 					},
-					'search@dashboard': {
-						templateUrl: 'templates/search/algolia-autocomplete.html',
-						controller: 'SearchController as search',
-					}
+					// 'search@dashboard': {
+					// 	// templateUrl: 'templates/search/algolia-autocomplete.html',
+					// 	templateUrl: 'templates/dashboard/partials/search.html',
+					// 	controller: 'SearchController',
+					// 	controllerAs: 'search'
+					// },
+					// 'navbar@dashboard': {
+					// 	templateUrl: 'templates/dashboard/partials/navbar.html',
+					// 	controller: 'NavbarController',
+					// 	controllerAs: 'dashboard'
+					// }
 				},
 				data: { requiredLogin: true } 
 			});
+
+		
 	}
 
 })(); 
@@ -370,12 +375,12 @@
 
 		$urlRouterProvider.otherwise('/');
 		
-		$stateProvider
-			.state('navbar', {
-				url: '/',
-				templateUrl: 'templates/partials/navbar.html',
-				controller: 'NavbarController as navbar' 
-			});
+		// $stateProvider
+		// 	.state('navbar', {
+		// 		url: '/',
+		// 		templateUrl: 'templates/partials/navbar.html',
+		// 		controller: 'NavbarController as navbar' 
+		// 	});
 	}
 
 })(); 
@@ -471,13 +476,9 @@
 
 		function getDatasets() {
 			return {
-	          source: algolia.sources.hits(index, { hitsPerPage: 5 }),
-	          //value to be displayed in input control after user's suggestion selection
-	          displayKey: 'title',
-	          //hash of templates used when rendering dataset
+	          source: algolia.sources.hits(index, { hitsPerPage: 5 }), displayKey: 'title',
 	          templates: {
-	            //'suggestion' templating function used to render a single suggestion
-	            suggestion: function(suggestion) {
+	          	suggestion: function(suggestion) {
 	                return '<span>' +
 	                    suggestion._highlightResult.title.value
 	                    + '</span>';
@@ -485,36 +486,9 @@
 	          }
 	      };
 	 	}
-
-		console.log('SearchController()');
 	}
 
 })();
-
-
-(function() {
-	'use strict';
-
-	angular
-		.module('app')
-		.config(config);
-	
-	
-	config.injector = ['$stateProvider', '$urlRouterProvider'];
-	function config($stateProvider, $urlRouterProvider) {
-
-		// $urlRouterProvider.otherwise('/');
-		
-		$stateProvider
-			.state('search', {
-				url: '/search',
-				// templateUrl: 'templates/search/algolia-autocomplete.html',
-				controller: 'SearchController',
-				controllerAs: 'search'
-			});
-	}
-
-})(); 
 
 
 angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
@@ -672,7 +646,7 @@ angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
 	config.injector = ['$stateProvider', '$urlRouterProvider'];
 	function config($stateProvider, $urlRouterProvider) {
 
-		// $urlRouterProvider.otherwise('/#dashboard');
+		$urlRouterProvider.otherwise('/');
 		
 		$stateProvider
 			.state('todos', {

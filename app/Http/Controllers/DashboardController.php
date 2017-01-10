@@ -17,6 +17,7 @@ class DashboardController extends Controller
 
         Todo::reindex();
 
+        // TODO: loading effect
         return 'Syncing...';
     }
 
