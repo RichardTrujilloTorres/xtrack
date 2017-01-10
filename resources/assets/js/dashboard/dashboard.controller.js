@@ -15,7 +15,7 @@
 
 
 		function Init() {
-			console.log(APP_NAME);
+			// console.log(APP_NAME);
 		}
 
 		

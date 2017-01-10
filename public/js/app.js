@@ -1,12 +1,24 @@
+// (function() {
+// 	'use strict';
+
+// 	angular
+// 		.module('app.core', [
+// 			]);
+// })(); 
+
+
+
 (function() {
 	'use strict';
 
 	angular
 		.module('app.core', [
-			]);
-})(); 
+			'algoliasearch', 
+			'algolia.autocomplete'
+		]);
+		
 
-
+})();
 
 
 
@@ -25,6 +37,8 @@
 			'app.core'
 			]);
 })(); 
+
+
 
 
 
@@ -106,7 +120,7 @@
 
 
 		function Init() {
-			console.log(APP_NAME);
+			// console.log(APP_NAME);
 		}
 
 		
@@ -123,12 +137,37 @@
 	/* @ngInject */
 	function config($stateProvider, $urlRouterProvider) {
 		
+		// $stateProvider
+		// 	.state('dashboard', {
+		// 		url: '/dashboard',
+		// 		templateUrl: 'templates/users/dashboard.html',
+		// 		controller: 'DashboardController',
+		// 		controllerAs: 'dashboard',
+		// 		data: { requiredLogin: true } 
+		// 	});
+
+		// $stateProvider
+		// 	.state('search', {
+		// 		url: '/dashboard',
+		// 		templateUrl: 'templates/users/dashboard.html',
+		// 		controller: 'DashboardController',
+		// 		controllerAs: 'dashboard',
+		// 		data: { requiredLogin: true } 
+		// 	});
+
 		$stateProvider
 			.state('dashboard', {
 				url: '/dashboard',
-				templateUrl: 'templates/users/dashboard.html',
-				controller: 'DashboardController',
-				controllerAs: 'dashboard',
+				views: {
+					'': {
+						templateUrl: 'templates/users/dashboard.html',
+						controller: 'DashboardController as dummy',
+					},
+					'search@dashboard': {
+						templateUrl: 'templates/search/algolia-autocomplete.html',
+						controller: 'SearchController as search',
+					}
+				},
 				data: { requiredLogin: true } 
 			});
 	}
@@ -141,9 +180,38 @@
 		.module('app')
 		.controller('GamesController', GamesController);
 
-	GamesController.$inject = ['$http'];
-	function GamesController($http) {
+	GamesController.$inject = ['$http', 'algolia'];
+	function GamesController($http, algolia) {
 		var vm = this;
+		var index = 'house';
+		var client = algoliasearch("TIF4HGI5L9", "822f952aefc6927aa0ce8ab0853b29cb");
+		var index = client.initIndex('todos');
+
+		vm.getDatasets = function() {
+	      return {
+	        source: algolia.sources.hits(index, { hitsPerPage: 5 }),
+	        //value to be displayed in input control after user's suggestion selection
+	        displayKey: 'todos',
+	        //hash of templates used when rendering dataset
+	        templates: {
+	          //'suggestion' templating function used to render a single suggestion
+	          suggestion: function(suggestion) {
+	              return '<span>' +
+	                  suggestion._highlightResult.name.value + '</span><span>' +
+	                  suggestion._highlightResult.team.value + '</span>';
+	          }
+	        }
+	      };
+    	};
+
+    	console.log(vm.getDatasets());
+
+
+    	// vm.search = __search;
+
+    	// function __search() {
+
+    	// }
 
 		console.log('GamesController()');
 	}
@@ -383,6 +451,97 @@
 	'use strict';
 
 	angular
+		.module('app')
+		.controller('SearchController', SearchController);
+
+	SearchController.$inject = ['algolia'];
+	/* @nginject */
+	function SearchController(algolia) {
+		var vm = this;
+
+		// vm.search = __search;
+		// vm.go = go;
+
+		vm.getDatasets = getDatasets;
+		var client = algoliasearch("TIF4HGI5L9", "822f952aefc6927aa0ce8ab0853b29cb");
+		// TODO: set it dynamically
+      	var index = client.initIndex('todos'); 
+
+
+
+		function getDatasets() {
+			return {
+	          source: algolia.sources.hits(index, { hitsPerPage: 5 }),
+	          //value to be displayed in input control after user's suggestion selection
+	          displayKey: 'title',
+	          //hash of templates used when rendering dataset
+	          templates: {
+	            //'suggestion' templating function used to render a single suggestion
+	            suggestion: function(suggestion) {
+	                return '<span>' +
+	                    suggestion._highlightResult.title.value
+	                    + '</span>';
+	            }
+	          }
+	      };
+	 	}
+
+		console.log('SearchController()');
+	}
+
+})();
+
+
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.config(config);
+	
+	
+	config.injector = ['$stateProvider', '$urlRouterProvider'];
+	function config($stateProvider, $urlRouterProvider) {
+
+		// $urlRouterProvider.otherwise('/');
+		
+		$stateProvider
+			.state('search', {
+				url: '/search',
+				// templateUrl: 'templates/search/algolia-autocomplete.html',
+				controller: 'SearchController',
+				controllerAs: 'search'
+			});
+	}
+
+})(); 
+
+
+angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
+  .controller('yourController', ['$scope', 'algolia', function($scope, algolia) {
+    var client = algoliasearch("TIF4HGI5L9", "822f952aefc6927aa0ce8ab0853b29cb");
+    var index = client.initIndex('YourIndex');
+    $scope.getDatasets = function() {
+      return {
+        source: algolia.sources.hits(index, { hitsPerPage: 5 }),
+        //value to be displayed in input control after user's suggestion selection
+        displayKey: 'name',
+        //hash of templates used when rendering dataset
+        templates: {
+          //'suggestion' templating function used to render a single suggestion
+          suggestion: function(suggestion) {
+              return '<span>' +
+                  suggestion._highlightResult.name.value + '</span><span>' +
+                  suggestion._highlightResult.team.value + '</span>';
+          }
+        }
+      };
+    };
+  }]);
+(function() {
+	'use strict';
+
+	angular
 		.module('app.core')
 		.service('dataservice', data);
 
@@ -428,17 +587,39 @@
 		.module('app')
 		.controller('TodosController', TodosController);
 
-	TodosController.$inject = ['$http', 'dataservice'];
+	TodosController.$inject = ['$http', 'dataservice', 'algolia'];
 	/* @nginject */
-	function TodosController($http, dataservice) {
+	function TodosController($http, dataservice, algolia) {
 		var vm = this;
 		var todosUri = 'todos';
 
 		vm.edit = __edit;
 		vm.delete = __delete;
 
+		vm.getDatasets = getDatasets;
+
+
+
 
 		getTodoList();
+
+		function getDatasets() {
+			return {
+	          source: algolia.sources.hits(index, { hitsPerPage: 5 }),
+	          //value to be displayed in input control after user's suggestion selection
+	          displayKey: 'title',
+	          //hash of templates used when rendering dataset
+	          templates: {
+	            //'suggestion' templating function used to render a single suggestion
+	            suggestion: function(suggestion) {
+	                return '<span>' +
+	                    suggestion._highlightResult.title.value
+	                    + '</span>';
+	            }
+	          }
+	      };
+
+	  	}
 
 
 

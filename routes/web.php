@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('/search', function(Request $request) {
+Route::post('/search', function(Request $request) {
 
 	$todos = new Todo;
 
@@ -28,6 +28,7 @@ Route::get('/search', function(Request $request) {
 		return response()->json(['error' => "No match found."]);
 	}
 
+	// TODO: error handling
 	dd("No query");
 
 
