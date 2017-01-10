@@ -8,17 +8,6 @@
 
 
 
-(function() {
-	'use strict';
-
-	angular
-		.module('app.core', [
-			'algoliasearch', 
-			'algolia.autocomplete'
-		]);
-		
-
-})();
 
 
 
@@ -37,6 +26,17 @@
 			'app.core'
 			]);
 })(); 
+
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.value('APP_NAME', APP_NAME);
+	
+})();
+
+
 
 
 
@@ -108,14 +108,88 @@
 
 	angular
 		.module('app')
+		.controller('ContactsController', ContactsController);
+
+	ContactsController.$inject = ['$http', 'dataservice'];
+	/* @nginject */
+	function ContactsController($http, dataservice) {
+		var vm = this;
+		var contactsUri = 'contacts';
+
+
+		getContactList();
+
+
+		function getContactList() {
+			console.log(dataservice);
+			// var todos = Todo;
+
+			dataservice
+				.all(contactsUri)
+					.success(function(data) {
+						console.log(data);
+						vm.contacts = data.contacts;
+					})
+					.error(function(data) {
+						console.log('something went wrong');
+					});
+		}
+	}
+
+})();
+
+
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.config(config);
+	
+	
+	config.injector = ['$stateProvider', '$urlRouterProvider'];
+	function config($stateProvider, $urlRouterProvider) {
+
+		$urlRouterProvider.otherwise('/');
+		
+		$stateProvider
+			.state('contacts', {
+				url: '/contacts',
+				templateUrl: 'templates/contacts/index.html',
+				controller: 'ContactsController as contacts' 
+			});
+	}
+
+})(); 
+
+
+(function() {
+	'use strict';
+
+	angular
+		.module('app.core', [
+			'algoliasearch', 
+			'algolia.autocomplete'
+		]);
+		
+
+})();
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
 		.controller('DashboardController', DashboardController);
 	
 	
-	DashboardController.$inject = ['dataservice'];
+	DashboardController.$inject = ['dataservice', 'APP_NAME'];
 	/* @ngInject */
-	function DashboardController(dataservice) {
+	function DashboardController(dataservice, APP_NAME) {
 		var vm = this;
-		// vm.notifications = {};
+		vm.APP_NAME = APP_NAME;
+
+		vm.active = 'active';
+
 
 
 		Init();
@@ -124,11 +198,15 @@
 		function Init() {
 			// console.log(APP_NAME);
 			loadNotifications();
+			// setActive();
 		}
+
+		// function setActive() {
+		// 	vm.active = !vm.active;
+		// }
 
 
 		function loadNotifications() {
-			// console.log('notifications');
 			var notifications = dataservice;
 			notifications.all('notifications')
 				.then(function(response) {
@@ -171,7 +249,9 @@
 					// 	controllerAs: 'dashboard'
 					// }
 				},
-				data: { requiredLogin: true } 
+				data: { 
+					requiredLogin: true
+				} 
 			});
 
 		
@@ -570,30 +650,9 @@ angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
 		vm.edit = __edit;
 		vm.delete = __delete;
 
-		vm.getDatasets = getDatasets;
-
-
-
 
 		getTodoList();
 
-		function getDatasets() {
-			return {
-	          source: algolia.sources.hits(index, { hitsPerPage: 5 }),
-	          //value to be displayed in input control after user's suggestion selection
-	          displayKey: 'title',
-	          //hash of templates used when rendering dataset
-	          templates: {
-	            //'suggestion' templating function used to render a single suggestion
-	            suggestion: function(suggestion) {
-	                return '<span>' +
-	                    suggestion._highlightResult.title.value
-	                    + '</span>';
-	            }
-	          }
-	      };
-
-	  	}
 
 
 
@@ -604,15 +663,6 @@ angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
 		function __edit(index) {
 			console.log('edit: ' + index);
 		}
-		// vm.todosUri = todosUri;
-
-
-		// console.log('TodosController(' + APP_NAME + ')');
-
-		// retrive todo listing
-
-		
-
 
 		function getTodoList() {
 			// console.log(dataservice);

@@ -28,13 +28,16 @@
     <link rel="stylesheet" href="/css/algoliasearch.css">
 
 
+
+
 </head>
 
 <body>
 
 	<div class="wrapper">
 
-	    @include('partials._sidebar')
+	    <div ng-include="'templates/partials/dashboard/_sidebar.html'"
+	    ng-controller="DashboardController as dashboard"></div>
 
 
 	    <!-- <div ui-view></div> -->
@@ -63,6 +66,10 @@
 </div>
 
 </body>
+
+	<script type="text/javascript">
+		var APP_NAME = '{{ config('app.name') }}';
+	</script>
 
 	<!--   Core JS Files   -->
 	<script src="../assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
@@ -110,8 +117,6 @@
 	<script src="js/app.js"></script>
 
 
-	<script type="text/javascript">
-		var APP_NAME = '{{ config('app.name') }}';
-	</script>
+	
 
 </html>

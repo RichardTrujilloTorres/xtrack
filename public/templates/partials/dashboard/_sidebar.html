@@ -7,13 +7,13 @@
 
 	<div class="logo">
 		<a href="" class="simple-text">
-			{{ config('app.name') }}
+			{{ dashboard.APP_NAME }}
 		</a>
 	</div>
 
 	<div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="isActive()">
+            <li class="{{ dashboard.active }}">
                 <a href="#/dashboard">
                     <i class="material-icons">dashboard</i>
                     <p>Dashboard</p>

@@ -6,11 +6,14 @@
 		.controller('DashboardController', DashboardController);
 	
 	
-	DashboardController.$inject = ['dataservice'];
+	DashboardController.$inject = ['dataservice', 'APP_NAME'];
 	/* @ngInject */
-	function DashboardController(dataservice) {
+	function DashboardController(dataservice, APP_NAME) {
 		var vm = this;
-		// vm.notifications = {};
+		vm.APP_NAME = APP_NAME;
+
+		vm.active = 'active';
+
 
 
 		Init();
@@ -19,11 +22,15 @@
 		function Init() {
 			// console.log(APP_NAME);
 			loadNotifications();
+			// setActive();
 		}
+
+		// function setActive() {
+		// 	vm.active = !vm.active;
+		// }
 
 
 		function loadNotifications() {
-			// console.log('notifications');
 			var notifications = dataservice;
 			notifications.all('notifications')
 				.then(function(response) {

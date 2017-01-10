@@ -67,6 +67,9 @@ $api -> version('v1', [
 	# Todos
 	$api -> resource('/todos', 'TodosController');
 
+	# Contacts
+	$api -> resource('/contacts', 'ContactsController');
+
 	# Notifications
 	$api -> resource('/notifications', 'NotificationsController');
 

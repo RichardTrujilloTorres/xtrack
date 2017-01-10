@@ -29,7 +29,9 @@
 					// 	controllerAs: 'dashboard'
 					// }
 				},
-				data: { requiredLogin: true } 
+				data: { 
+					requiredLogin: true
+				} 
 			});
 
 		

@@ -11,6 +11,17 @@
 			]);
 })(); 
 
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.value('APP_NAME', APP_NAME);
+	
+})();
+
+
+
 
 
 
