@@ -14,7 +14,7 @@
 		// vm.go = go;
 
 		vm.getDatasets = getDatasets;
-		var client = algoliasearch("TIF4HGI5L9", "822f952aefc6927aa0ce8ab0853b29cb");
+		var client = algoliasearch("TIF4HGI5L9", "303b33728655e90db6bdf6c2a445c6ff");
 		// TODO: set it dynamically
       	var index = client.initIndex('todos'); 
 
