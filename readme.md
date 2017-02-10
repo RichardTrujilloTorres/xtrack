@@ -3,7 +3,7 @@
 Demo Angular 1.5 & Laravel 5.3 App.
 
 
-![xTrack Screenshot 1](https://github.com/RickyNRoses87/xtrack/tree/master/docs/screenshots/Dashboard | xTrack - Google Chrome_018.png)
+![xTrack Screenshot 1](https://github.com/RickyNRoses87/xtrack/blog/master/docs/screenshots/Dashboard | xTrack - Google Chrome_018.png)
 
 
 ## Features
