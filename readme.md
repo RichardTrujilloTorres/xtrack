@@ -25,7 +25,7 @@ gulp watch
 * BE: 
 ```
 composer install
-php artisan migrate && php db:seed
+php artisan migrate && php artisan db:seed
 ```
 
 Navigate to 'application_url:port/dashboard'
@@ -33,3 +33,5 @@ Navigate to 'application_url:port/dashboard'
 
 
 ## Testing 
+
+// TODO
