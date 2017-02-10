@@ -17,6 +17,13 @@
 				templateUrl: 'templates/mail/index.html',
 				controller: 'MailController as mail' 
 			});
+
+		$stateProvider
+			.state('mailShow', {
+				url: '/mail/show/:id',
+				templateUrl: 'templates/mail/show.html',
+				controller: 'MailController as mail' 
+			});
 	}
 
 })(); 

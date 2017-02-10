@@ -1,6 +1,6 @@
 angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
   .controller('yourController', ['$scope', 'algolia', function($scope, algolia) {
-    var client = algoliasearch("TIF4HGI5L9", "822f952aefc6927aa0ce8ab0853b29cb");
+    var client = algoliasearch("TIF4HGI5L9", "c72729aae4ac818abbbf5f8e4caa09bc");
     var index = client.initIndex('YourIndex');
     $scope.getDatasets = function() {
       return {

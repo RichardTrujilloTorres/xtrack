@@ -18,6 +18,14 @@
 				controller: 'TodosController',
 				controllerAs: 'todos' 
 			});
+
+		$stateProvider
+			.state('todosNew', {
+				url: '/todos/new',
+				templateUrl: 'templates/todos/new.html',
+				controller: 'TodosController',
+				controllerAs: 'todos' 
+			});
 	}
 
 })(); 

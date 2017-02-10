@@ -10,6 +10,10 @@
 	function ContactsController($http, dataservice) {
 		var vm = this;
 		var contactsUri = 'contacts';
+		// vm.edit = edit;
+		// vm.delete = delete;
+
+		
 
 
 		getContactList();

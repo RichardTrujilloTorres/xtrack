@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="col-sm-12">
+		<i class="material-icons">add_circle</i>
+	</div>
+</div>
+
+<!-- bills section -->
+<div class="col-lg-12 col-md-12">
+	<div class="card">
+        <div class="card-header" data-background-color="red">
+            <h4 class="title">Bills</h4>
+            <p class="category"></p>
+        </div>
+        <div class="card-content table-responsive">
+            <table class="table table-hover">
+                <thead class="text-info">
+                	<th>Client</th>
+                	<th>Amount</th>
+                	<th>Deadline</th>
+                	<th>SM</th>
+                	<th>Action</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="contact in contacts.contacts">
+                    	<td>{{ contact.name }}</td>
+                    	<td>{{ contact.email }}</td>
+                    	<td>{{ contact.phone_number }}</td>
+                    	<td>// icons w/ links</td>
+                    	<td>
+							<!-- <i class="material-icons" ng-click="">pageview</i> -->
+							<i class="material-icons" ng-click="contacts.edit(contacts.id)">edit</i>
+							<i class="material-icons" ng-click="contacts.delete(contacts.id)">delete</i>
+						</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+	<div class="col-lg-6 col-md-12">
+		// load more
+	</div>
+	
+</div>
+

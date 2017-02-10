@@ -39,3 +39,11 @@ $factory->define(App\Contact::class, function (Faker\Generator $faker) {
         'linkedin_url' => $faker->url,
     ];
 });
+
+$factory->define(App\Mail::class, function (Faker\Generator $faker) {
+    return [
+        'sender' => $faker->unique()->safeEmail,
+        'subject' => $faker->sentence,
+        'body' => $faker->text,
+    ];
+});

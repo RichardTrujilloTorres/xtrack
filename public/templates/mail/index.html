@@ -1,1 +1,36 @@
-// mail
+
+
+// category, body
+<div class="row">
+<div class="col-lg-6 col-md-12">
+	<div class="card card">
+
+		<div class="card-header" data-background-color="red">
+			<i class="material-icons" ng-click="mail.add()">add_circle</i>
+			<i class="material-icons" ng-click="mail.remove()">remove_circle</i>
+		</div>
+
+		<!-- <div class="card-header" data-background-color="green">
+			<i class="material-icons">mail</i>
+		</div> -->
+
+		<div class="card-content">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th> </th>
+						<th>Sender</th>
+						<th>Subject</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="mail in mail.mails">
+						<td><input type="checkbox" name="optionsCheckboxes" ng-select="mail.select(mail.id)"></td>
+						<td>{{ mail.sender }}</td>
+						<td><a href="#/mail/show/{{ mail.id }}">{{ mail.subject }}</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -73,6 +73,9 @@ $api -> version('v1', [
 	# Notifications
 	$api -> resource('/notifications', 'NotificationsController');
 
+	# Notifications
+	$api -> resource('/mails', 'MailsController');
+
 
 
 	$api -> get('test', function() {

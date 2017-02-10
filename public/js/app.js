@@ -108,6 +108,90 @@
 
 	angular
 		.module('app')
+		.controller('BillsController', BillsController);
+
+	BillsController.$inject = ['$http'];
+	/* @nginject */
+	function BillsController($http) {
+		var vm = this;
+
+		console.log('BillsController()');
+	}
+
+})();
+
+
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.config(config);
+	
+	
+	config.injector = ['$stateProvider', '$urlRouterProvider'];
+	function config($stateProvider, $urlRouterProvider) {
+
+		$urlRouterProvider.otherwise('/');
+		
+		$stateProvider
+			.state('bills', {
+				url: '/bills',
+				templateUrl: 'templates/bills/index.html',
+				controller: 'BillsController as bills' 
+			});
+	}
+
+})(); 
+
+
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.controller('CloudController', CloudController);
+
+	CloudController.$inject = ['$http'];
+	/* @nginject */
+	function CloudController($http) {
+		var vm = this;
+
+		console.log('CloudController()');
+	}
+
+})();
+
+
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.config(config);
+	
+	
+	config.injector = ['$stateProvider', '$urlRouterProvider'];
+	function config($stateProvider, $urlRouterProvider) {
+
+		$urlRouterProvider.otherwise('/');
+		
+		$stateProvider
+			.state('cloud', {
+				url: '/cloud',
+				templateUrl: 'templates/cloud/index.html',
+				controller: 'CloudController as cloud' 
+			});
+	}
+
+})(); 
+
+
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
 		.controller('ContactsController', ContactsController);
 
 	ContactsController.$inject = ['$http', 'dataservice'];
@@ -115,6 +199,10 @@
 	function ContactsController($http, dataservice) {
 		var vm = this;
 		var contactsUri = 'contacts';
+		// vm.edit = edit;
+		// vm.delete = delete;
+
+		
 
 
 		getContactList();
@@ -390,11 +478,68 @@
 		.module('app')
 		.controller('MailController', MailController);
 
-	MailController.$inject = ['$http'];
-	function MailController($http) {
+	MailController.$inject = ['$http', 'dataservice', '$stateParams'];
+	function MailController($http, dataservice, $stateParams) {
 		var vm = this;
+		var todosUri = 'mails';
 
-		console.log('MailController()');
+		vm.remove = remove;
+		vm.add = add;
+		vm.select = select;
+
+
+		init();
+
+
+
+		function init() {
+
+			if ($stateParams.id) {
+				loadSingle($stateParams.id);
+				return;
+			}
+
+			// TODO: cache/local storage
+			dataservice
+				.all(todosUri)
+					.success(function(data) {
+						console.log(data.mails);
+						vm.mails = data.mails;
+					})
+					.error(function(data) {
+						console.log('something went wrong');
+					});
+		}
+
+		function loadSingle(id) {
+			dataservice
+				.get(todosUri, id)
+					.success(function(data) {
+						console.log(data.mail);
+						vm.mail = data.mail;
+					})
+					.error(function(data) {
+						console.log('something went wrong');
+					});
+		}
+
+		function select(id) {
+			vm.selected.push(id);
+			console.log(vm.selected);
+		}
+
+		function remove() {
+			// if (! vm.selected) {
+			// 	console.log('no mail selected');
+			// }
+			
+		}
+
+		function add() {
+			console.log('add');
+		}
+
+
 	}
 
 })();
@@ -417,6 +562,13 @@
 			.state('mail', {
 				url: '/mail',
 				templateUrl: 'templates/mail/index.html',
+				controller: 'MailController as mail' 
+			});
+
+		$stateProvider
+			.state('mailShow', {
+				url: '/mail/show/:id',
+				templateUrl: 'templates/mail/show.html',
 				controller: 'MailController as mail' 
 			});
 	}
@@ -573,7 +725,7 @@
 
 angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
   .controller('yourController', ['$scope', 'algolia', function($scope, algolia) {
-    var client = algoliasearch("TIF4HGI5L9", "822f952aefc6927aa0ce8ab0853b29cb");
+    var client = algoliasearch("TIF4HGI5L9", "c72729aae4ac818abbbf5f8e4caa09bc");
     var index = client.initIndex('YourIndex');
     $scope.getDatasets = function() {
       return {
@@ -647,6 +799,7 @@ angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
 		var vm = this;
 		var todosUri = 'todos';
 
+		vm.add = __add;
 		vm.edit = __edit;
 		vm.delete = __delete;
 
@@ -655,6 +808,9 @@ angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
 
 
 
+		function __add(form) {
+			console.log(form);
+		}
 
 		function __delete(index) {
 			console.log('delete: ' + index);
@@ -702,6 +858,14 @@ angular.module('myApp', ['algoliasearch', 'algolia.autocomplete'])
 			.state('todos', {
 				url: '/todos',
 				templateUrl: 'templates/todos/index.html',
+				controller: 'TodosController',
+				controllerAs: 'todos' 
+			});
+
+		$stateProvider
+			.state('todosNew', {
+				url: '/todos/new',
+				templateUrl: 'templates/todos/new.html',
 				controller: 'TodosController',
 				controllerAs: 'todos' 
 			});

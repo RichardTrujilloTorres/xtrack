@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-6">
+		<form role="form" name="newTodoForm" ng-submit="todos.add(newTodoForm)">
+			<legend>Add Todo</legend>
+
+			<div class="form-group">
+				<label for="title">Title</label>
+				<input type="text" class="form-control" id="title" name="title" placeholder="..."
+				ng-model="todos.new.title">
+			</div>
+		
+			<div class="form-group">
+				<label for="body">Body</label>
+				<textarea name="body" id="body" class="form-control" rows="3"
+				ng-model="todos.new.body"></textarea>
+			</div>
+
+			<div class="form-group">
+				<label for="time_frame">Time Frame</label>
+				// select
+				<!-- <select name="time_frame" id="time_frame" class="form-control" 
+				ng-select="timeFrame as timeFrame in todos.timeFrame">
+				</select> -->
+			</div>
+
+			<div class="form-group">
+				<label for="category">Category</label>
+				// select
+			</div>
+		
+		
+			<!-- // title
+			body
+			time_frame
+			category	 --> 
+		
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</div>

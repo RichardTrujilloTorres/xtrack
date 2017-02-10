@@ -11,6 +11,7 @@
 		var vm = this;
 		var todosUri = 'todos';
 
+		vm.add = __add;
 		vm.edit = __edit;
 		vm.delete = __delete;
 
@@ -19,6 +20,9 @@
 
 
 
+		function __add(form) {
+			console.log(form);
+		}
 
 		function __delete(index) {
 			console.log('delete: ' + index);
