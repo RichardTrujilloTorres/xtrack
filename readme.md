@@ -9,7 +9,7 @@ Demo Angular 1.5 & Laravel 5.3 App.
 ## Features
 * Angular 1.5: Algolia Search FE component, Satellizer.
 * Laravel 5.3: Dingo API, JWT.
-* Thirth party dependencies: Algolia Search, Amazon S3.
+* Third party dependencies: Algolia Search, Amazon S3.
 
 
 
